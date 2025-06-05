@@ -77,16 +77,30 @@ We call the corresponding group, the \emph{Hurwitz group}.
 
 	We make a similar argument if the last factor of $\beta$ is  $\sigma_{i-1}^{-1}$.
 \end{proof}
+
+\begin{remark}
+	\label{rmk:relations_in_hurwitz_group}
+	The above lemma tells us that there is a presentation for any Hurwitz group $H$ associated to the tuple $\tau$ in just the elements $\Set{[\tau_i]} $.
+	When we transform the defining relations in to relations in the set $\Set{[\tau_i]} $, they have a very particular form.
+	For example, considering the tuple $(a,b) \in G^2$, we have the relation
+	\[
+		[aba^{-1}]=[a][b][a]^{-1}
+		.\]
+	We see that this relation allows us to commute the square bracket decorations through the word that we get from the Hurwitz action, and every such defining relation can be re-written in this way.
+	However, note that the data that defines the relation is the specific word $aba^{-1}$ that emerges by performing the Hurwitz action as if $a$ and $b$ are free group elements.
+	If it was true that $aba^{-1} \stackrel{G}{=} xyz$, for some arbitrary $x,y,z \in G$, we would \emph{not} necessarily have the relation $[aba^{-1}]=[x][y][z]$, and there is no reason to assume that any of $[x]$, $[y]$ or $[z]$ are even generators in the defining presentation for $H$.
+\end{remark}
+
 The following is not a standard definition.
 \begin{definition}
 	Given a Coxeter element $w \in W$, the \emph{dual Artin group} associated to  $w$ is defined to be the Hurwitz group associated to any $(r_1,\ldots,r_n)$ such that all $r_i \in R$ and  $r_1r_2\cdots r_n=w$.
 \end{definition}
 The obvious tuple to consider is $(\pi_W(s_1),\ldots,\pi_W(s_n))$.
-Since our choice of $w$ is constant, we will denote our dual Artin group  $A^\vee$ (omitting any mention of  $w$).
+Since our choice of $w$ is constant, we will denote our dual Artin group  $A^\vee$ (omitting any mention of  $w$)
 
 Let $a,b \in G$ for some group  $G$.
-Let $\Pi(a,b;k)$ denote the alternating product of $a$ and  $b$, beginning with $a$, and of length  $k$, where  $a$ and  $b$ are any group elements.
-For example  $\Pi(a,b;5)=ababa$.
+Let $\Pi_k(a,b)$ denote the alternating product of $a$ and  $b$, beginning with $a$, and of length  $k$, where  $a$ and  $b$ are any group elements.
+For example  $\Pi_5(a,b)=ababa$.
 \begin{lemma}
 	Let $G$ be a group such that there exists a homomorphism $\phi \colon A \to G$ from our Artin group.
 	Consider the tuple $\tau = (\phi \circ \pi_A)^n(s_1,\ldots,s_n) \in G^n$.
@@ -94,21 +108,33 @@ For example  $\Pi(a,b;5)=ababa$.
 \end{lemma}
 \begin{proof}
 	For each $i$, let $t_i$ denote  $\pi_A(s_i)$ and  $u_i$ denote  $\phi(t_i)$.
-	We will show that the map $t_i \mapsto u_i$ extends to a homomorphism.
-	To do so, we need to show that any Artin-like equation of the form $\Pi(u_i,u_j;k) = \Pi(u_j,u_i;k)$ associated to a defining relation in $A$ also holds in $H$.
+	We will show that the map $t_i \mapsto [u_i]$ extends to a homomorphism.
+	To do so, we need to show that any Artin-like equation of the form $\Pi_k(t_i,t_j) = \Pi_k(t_j,t_j)$ associated to a defining relation in $A$ also holds in $H$.
 
 	For any $i < j$, there is a braid $\beta$ such that  $\beta \cdot (u_1,\ldots,u_n)$ begins with $u_i,u_j$.
-	Thus, without loss of generality, we can assume for the following argument that $i=1$ and  $j=2$
-	Let us examine what happens when we keep acting by $\sigma_1$ on  $(u_1,\ldots,u_n)$.
-
-	Acting once we get the relation
+	Thus, without loss of generality, we can assume for the following argument that $i=1$ and  $j=2$.
+	We only care about what happens at the first two places of this tuple, so we will only consider the Hurwitz action on the duple $(u_1,u_2)$.
+	Consider the function $f_n(a,b) \coloneq \Pi_{n+1}(a,b)\Pi_n(a,b)^{-1} $.
+	One can compute that $f_n(a,b)^{f_{n-1}(a,b)^{-1}}=f_{n+1}(a,b)$.
+	Acting once by $\sigma_1$ on our duple we have
 	\[
-		[u_2u_1u_2^{-1}]=[u_2][u_1][u_2]^{-1}
+		\sigma_1 \cdot (u_1,u_2) = (u_1u_2u_1^{-1},u_1) = (f_1(u_1,u_2),f_0(u_1,u_2))
 		.\]
-	Once more, with some substitution using the above
+	Thus, for $k>0$, we have
 	\[
-		[u_1u_2u_1u_2^{-1}u_1^{-1}] = [u_1][u_2u_1u_2^{-1}][u_1]^{-1} = [u_1][u_2][u_1][u_2]^{-1}[u_1]^{-1}
+		\sigma_1^k \cdot (u_1,u_2) = (f_{k}(u_1,u_2),f_{k-1}(u_1,u_2))
 		.\]
+	So for each $k \geq 0$, we have a generator $[f_k(u_1,u_2)]$ in $H$, and as in \cref{rmk:relations_in_hurwitz_group} the corresponding relation
+	\[
+		[f_k(u_1,u_2)]=f_k([u_1],[u_2])
+		.\]
+	Suppose that $A$ has the relation  $\Pi_k(t_1,t_2)=\Pi_k(t_2,t_1)$, then in $H$ we have
+	\begin{align*}
+		f_k([u_1],[u_2])                               & = [f_k(u_1,u_2)] =  [\phi(f_k(t_1,t_2))] =                     \\
+		[\phi(\Pi_{k+1}(t_1,t_2)\Pi_{k}(t_1,t_2)^{-1}] & = [\phi\left(\Pi_{k+1}(t_1,t_2)\Pi_{k}(t_2,t_1)^{-1}\right)] = \\
+		[\phi(t_1)]                                    & = [u_1]
+		.\end{align*}
+	So we have the relation $\Pi_{k}([u_1],[u_2]) = \Pi_k([u_2],[u_1])$ in $H$ as required.
 \end{proof}
 So the index-wise product of  $\pi^n_W(\tau)$ is  $w$.
 In this context, $\pi^n_G$ is a  $B_n$-set morphism from  $F_S^n$ to  $G^n$, where $G$ is either  $W$ or  $A$.
