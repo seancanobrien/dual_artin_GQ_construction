@@ -1,4 +1,19 @@
 %! TEX root = ../../main.tex
+\begin{definition}
+	\label{def:G_set}
+	Let $G$ be a group and $X$ be a set.
+	A \emph{$G$-set} is a set  $X$ with an accompanying  $G$ action, denoted  $g \cdot x$ for each  $g \in G$ and  $x \in X$.
+\end{definition}
+\begin{definition}
+	Given a group $G$, suppose we have two $G$-sets,  $X$, and $X^\prime$.
+	Now suppose we have a map  $f \colon X \to X^\prime$.
+	This map is a \emph{$G$-set morphism} iff
+	\[
+		f(g \cdot x) = g \cdot f(x)
+	\]
+	for all $g \in G$ and  $x \in X$.
+\end{definition}
+
 Let  $B_n$ denote the braid group on  $n$ strands with standard generating set $\Set{\sigma_i}$.
 \begin{definition}[The Hurwitz action]
 	Given any group $G$, there is an action of  $B_n$ on  $G^n$, called the \emph{Hurwitz action} where
@@ -9,13 +24,14 @@ Let  $B_n$ denote the braid group on  $n$ strands with standard generating set $
 	This also determines the action of $\sigma_i^{-1}$.
 \end{definition}
 This action preserves the index-wise product $(g_1, \ldots, g_n) \mapsto g_1g_2\cdots g_n$.
-Given some $X \subseteq G$, if $X^G = G$, then the Hurwitz action is also well-defined on $X^n$, and this makes any such $X$ a  $B_n$-set.
-If we set $\tau = \pi^n_W(s_1,\ldots,s_n)$, then by \cite{igusa_schiffler_exceptional_2010}, we know that $B_n \cdot \tau$ gives every minimal factorisation of  $w$ in to elements of $R$.
+Given some $X \subseteq G$, if $X^G = G$, then the Hurwitz action is also well-defined on $X^n$, and this makes any such $X$ a  $B_n$-set in the sense of \cref{def:G_set}.
+Given a map $f \colon X \to Y$, let  $f^{(n)}$ denote the map between $n$-tuples $(x_1,\ldots,x_n)\mapsto (f(x_1),\ldots,f(x_n))$.
+If we set $\tau = \pi^{(n)}_W(s_1,\ldots,s_n)$, then by \cite{igusa_schiffler_exceptional_2010}, we know that $B_n \cdot \tau$ gives every minimal factorisation of  $w$ in to elements of $R$.
 % In particular, we wish to consider this action on $S^n$, $T^n$ and $U^n$.
 
 \begin{remark}
 	\label{rmk:hurwitz_action_Bn_set_morphism}
-	Given two groups $G_1$ and  $G_2$, and a homomorphism $\phi \colon G_1 \to G_2$, the map $\phi^n \colon G_1^n \to G_2^n$ is a  $B_n$-set morphism.
+	Given two groups $G_1$ and  $G_2$, and a homomorphism $\phi \colon G_1 \to G_2$, the map $\phi^{(n)} \colon G_1^n \to G_2^n$ is a  $B_n$-set morphism.
 \end{remark}
 Let $p_1 \colon G^n \to G$ denote generic projection to the first coordinate of a tuple.
 We are interested in the tuples that occur due to the Hurwitz action.
@@ -25,23 +41,32 @@ By choosing braids that move elements to the first position in the tuple, we see
 
 Associated to a tuple, there is a monoid construction, which we will call the \emph{Hurwitz monoid}.
 \begin{definition}
+	\label{def:hurwitz_group}
 	Let $G$ be some group, and let $\tau$ be some tuple  in $G^k$.
-	Let $X$ denote  $\hurref(\tau)$.
 	Suppose there in there is a tuple in  $B_k \cdot \tau$ that begins $r_1,r_2$.
-	Let $s$ denote the element of $X$ equal in $G$ to  $r_1r_2r_1^{-1}$, and $t$ the element of  $X$ equal in  $G$ to  $r_2^{-1}r_1r_2$.
-	We call any such $(r_1,r_2,s,t)$ a \emph{Hurwitz quad}.
+	Let $s$ denote the element of $\hurref(\tau)$ equal in $G$ to  $r_1r_2r_1^{-1}$.
+	We call any such $(r_1,r_2,s)$ a \emph{Hurwitz triple}.
 	In this context, we define the \emph{Hurwitz monoid} $I$ associated to $\tau$ as follows.
 	Decorate elements $x \in X$ as $[x]$ to distinguish them as generators of $I$ rather than elements of $G$.
 	\[
-		I \coloneq \GroupPres{[X] \relations \Set{ [r_1][r_2] = [s][r_1],  [r_1][r_2] = [r_2][t] \given (r_1,r_2,s,t) \text{ is a Hurwitz quad}}}
+		I \coloneq \GroupPres{[X] \relations \Set{ [r_1][r_2] = [s][r_1] \given (r_1,r_2,s) \text{ is a Hurwitz triple}}}
 		.\]
 \end{definition}
 We call the corresponding group, the \emph{Hurwitz group}.
 We denote the Hurwitz group associated to a tuple $\tau$ by  $H(\tau)$.
+
 \begin{remark}
-	In the literature, \cite[Lemma 7.11]{bessis_topology_2004} and \cite[Proposition 3.5]{mccammond_dual_2015}, only one of the relation types are mentioned, namely the $[r_1][r_2] = [s][r_1]$ ones in the above definition (that come from a $\sigma_i^{+1}$, rather than a  $\sigma_i^{-1}$).
-	The author thinks this is an oversight, but that this does not substantially affect any of the theory.
+	The relations in the above definition are naturally associated to $\sigma_1$ acting on a tuple beginning with $r_1,r_2$.
+	However, we can also get the relation associated to  $\sigma_1^{-1}$ acting on the same tuple.
+	Suppose we have this tuple beginning with $r_1,r_2$ in $B_n \cdot \tau$.
+	If we then act by  $\sigma_1^{-1}$, our tuple begins with $r_2,t$, where $t$ is the element in  $\hurref(\tau)$ that is equal to  $r_2^{-1}r_1r_2$ in $G$.
+	The relation associated to this tuple beginning $r_2,t$ is
+	\[
+		[r_2][t]=[t^{-1}r_2t][r_2]
+	\]
+	where $t^{-1}r_2t=r_1$.
 \end{remark}
+
 \begin{lemma}
 	\label{lem:inj_on_hurref_implies_iso_hurwitz_group}
 	Suppose we have two groups $G_1$ and $G_2$ and a homomorphism $\phi \colon G_1 \to G_2$.
@@ -56,7 +81,7 @@ We denote the Hurwitz group associated to a tuple $\tau$ by  $H(\tau)$.
 
 \begin{lemma}
 	\label{lem:hurwitz_group_generators}
-	Given a group $G$ and a tuple $\tau \in G^k$, we have that $H(\tau)$ is generated by $\Set{\tau_i}$.
+	Given a group $G$ and a tuple $\tau \in G^k$, we have that $H(\tau)$ is generated by $\Set{[\tau_i]}$.
 \end{lemma}
 \begin{proof}
 	Let $\ell \colon B_n \to \N$ denote minimum word length with respect to the standard generating set $\Set{\sigma_i} $ for $B_n$.
@@ -66,7 +91,7 @@ We denote the Hurwitz group associated to a tuple $\tau$ by  $H(\tau)$.
 	Induction then completes the proof.
 
 	Since $x \notin \Set{\tau_i}$, we know $\ell(\beta)>0$.
-	Since $\beta$ is a braid of minimum length with respect to these generators, we know that there is a factorisation of $\beta$ in the $\Set{\sigma_i} $ such that the last factor is either $\sigma_k$ or  $\sigma_{k-1}^{-1}$, since these are the only generators whose action puts something new in the $i^{\text{th}}$ position of the tuple.
+	Since $\beta$ is a braid of minimum length with respect to these generators, we know that there is a factorisation of $\beta$ in the $\Set{\sigma_i} $ such that the last factor is either $\sigma_k$ or  $\sigma_{k-1}^{-1}$, since these are the only generators whose action puts something new in the $k^{\text{th}}$ position of the tuple.
 
 	Suppose the last factor of $\beta$ is $\sigma_k$.
 	Let $(\nu_1,\ldots,\nu_n) = \beta\sigma_k^{-1} \cdot \tau$, so $[x] = [\mu_k] = [\nu_{k+1}\nu_k\nu_{k+1}^{-1}]$.
@@ -75,6 +100,91 @@ We denote the Hurwitz group associated to a tuple $\tau$ by  $H(\tau)$.
 
 	We make a similar argument if the last factor of $\beta$ is  $\sigma_{i-1}^{-1}$.
 \end{proof}
+
+The above lemma tells us that there is a presentation for any $H(\tau)$ in just the elements $\Set{[\tau_i]} $.
+We now wish to develop this presentation for $H(\tau)$.
+
+To every relation $[r_1][r_2]=[s][r_1]$ set out in \cref{def:hurwitz_group} we can associate a braid $\beta$ such that  $\beta \cdot \tau$ begins with $r_1,r_2$.
+The relation shows how to express $[s]=[r_1r_2r_1^{-1}]$ in terms of $[r_1]$ and $[r_2]$.
+The proof above shows us that we can express $[r_1]$ and $[r_2]$ in terms of elements in  $\hurref(\tau)$ which result from braids of lower length, and so on.
+We can express this structure using a decorated binary tree in the following way
+
+Suppose for now our tuple $\tau$ is $(a,b,c) \in G^3$.
+We can act on this by $\sigma_2\sigma_1^{-1}$ to get $(b,b^{-1}abcb^{-1}a^{-1}b,b^{-1}ab)$.
+Consider now the generator $[b^{-1}abcb^{-1}a^{-1}b]$, and the relation $[b^{-1}ab][c] = [b^{-1}abcb^{-1}a^{-1}b][b^{-1}ab]$ in $H(\tau)$.
+Let us express this relation by the following tree, which should be understood as the encoding relation $[b^{-1}abcb^{-1}a^{-1}b]=[b^{-1}ab][c] [b^{-1}ab]^{-1}$.
+\[
+	\begin{tikzpicture}
+		\def\vsize{1}
+		\def\hsize{0.833}
+		\tikzstyle{every label}=[font=\footnotesize]
+		\tikzstyle{every node}=[font=\footnotesize]
+
+		\node[FSCW, label={$[b^{-1}abcb^{-1}a^{-1}b]$}] (top) at (0,0) {};
+		\node[FSC, label=below:{$[b^{-1}ab]$}] (l) at ($ (top) - (\hsize,\vsize) $) {};
+		\node[FSC, label=below:{$[c]$}] (r) at ($ (top) + (\hsize,-\vsize) $) {};
+
+		\draw (l) to (top);
+		\draw (r) to (top);
+	\end{tikzpicture}
+\]
+The top node is white, which specifies that the last factor in the right-hand side of the relation is an inverse.
+This corresponds to the positive braid $\sigma_2$ that \emph{created} the new generator $[b^{-1}abc b^{-1}a^{-1}b]$.
+Note that the planar order in this picture ($[b^{-1}ab]$ on the left and $[c]$ on the right) is important.
+
+Now consider the following tree, which should understood as encoding the relation $[b^{-1}ab]=[b]^{-1}[a][b]$.
+\[
+	\begin{tikzpicture}
+		\def\vsize{1}
+		\def\hsize{0.833}
+		\tikzstyle{every label}=[font=\footnotesize]
+		\tikzstyle{every node}=[font=\footnotesize]
+		\node[FSCB, label={$[b^{-1}ab]$}] (top) at (0,0) {};
+		\node[FSC, label=below:{$[a]$}] (l) at ($ (top) - (\hsize,\vsize) $) {};
+		\node[FSC, label=below:{$[b]$}] (r) at ($ (top) + (\hsize,-\vsize) $) {};
+
+		\draw (l) to (top);
+		\draw (r) to (top);
+	\end{tikzpicture}
+\]
+The top node is black, which specifies that the first factor in the right-hand side of the relation is an inverse.
+This corresponds to the negative braid $\sigma_1^{-1}$ that \emph{created} the new generator $[b^{-1}ab]$.
+
+We can put these two trees together.
+\[
+	\begin{tikzpicture}
+		\def\vsize{1}
+		\def\hsize{0.833}
+		\tikzstyle{every label}=[font=\footnotesize]
+		\tikzstyle{every node}=[font=\footnotesize]
+
+		\node[FSCW, label={$[b^{-1}abcb^{-1}a^{-1}b]$}] (top) at (0,0) {};
+		\node[FSCB] (m) at ($ (top) - (\hsize,\vsize) $) {};
+		\node[FSC, label=below:{$[a]$}] (ll) at ($ (top) + (-2*\hsize,-2*\vsize) $) {};
+		\node[FSC, label=below:{$[b]$}] (lr) at ($ (top) + (0,-2*\vsize) $) {};
+		\node[FSC, label=below:{$[c]$}] (r) at ($ (top) + (2*\hsize,-2*\vsize) $) {};
+
+		\draw (l) to (top);
+		\draw (ll) to (m);
+		\draw (lr) to (m);
+		\draw (r) to (top);
+	\end{tikzpicture}
+\]
+This tree encodes the relation  $[b^{-1}abc b^{-1}a^{-1}b]=\left([b]^{-1}[a][b]\right)[c]\left([b]^{-1}[a][b]\right)^{-1}$, by parsing relations as we move down the tree.
+
+The proof of \cref{lem:hurwitz_group_generators} tells us that any $r \in \hurref(\tau)$, and thus any relation, can be expressed using such a tree, where the bottom leaf nodes are labelled by elements of  $\Set{[\tau_i]}$.
+
+\begin{lemma}
+	\label{lem:hurwitz_group_alt_presentation}
+	Let $G$ be a group.
+	Let $\tau = (s_1,\ldots,s_n) \in F_S^n$ and let $\pi \colon F_S \to G$ denote a homomorphism.
+	Let $i \colon S \hookrightarrow F_S$ denote the natural inclusion.
+	The Hurwitz group associated to the tuple $\pi^{(n)}(\tau)$ is isomorphic to the following group presentation.
+	\[
+		\GroupPres{\pi(\hurref(\tau)) \relations \Set{\pi(q) = (\pi \circ i)_*(q) \given q \in \hurref(\tau)}}
+		.\]
+\end{lemma}
+
 
 \begin{remark}
 	\label{rmk:relations_in_hurwitz_group}
