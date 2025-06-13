@@ -43,6 +43,11 @@
 % Random, sometimes useful symbols!
 \usepackage{fontawesome5}
 
+% For quieting "overfull hbox" messages
+\hfuzz 10pt
+
+\usepackage{relsize}
+
 % ----- Custom maths macros ----------------------------------------------------
 \usepackage{sty/my_macros}
 % ------------------------------------------------------------------------------
@@ -51,6 +56,7 @@
 \usepackage{tikz}
 \usepackage{tkz-graph}
 \usepackage{tikz-cd}
+\usetikzlibrary{braids}
 
 % Automatically loaded when using amsart document class
 % \usepackage{amsthm}
